@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { GildedRose, BackStagePassItem, BasicItem, BrieItem, SulfurasItem } from '../app/gilded-rose';
+import { GildedRose, BackStagePassItem, BasicItem, BrieItem, SulfurasItem, ConjuredItem } from '../app/gilded-rose';
 
 describe('Gilded Rose', function () {
     let gilgedRose;
@@ -9,7 +9,9 @@ describe('Gilded Rose', function () {
             new BrieItem('Aged Brie', 10, 25),
             new SulfurasItem('Sulfuras, Hand of Ragnaros', 0, 0),
             new BackStagePassItem('Backstage passes to a TAFKAL80ETC concert', 15, 15),
-            new BasicItem('Something here', 25, 5),
+            new BasicItem('Cheddar Cheese', 25, 5),
+            new BasicItem('Bread', 2, 10),
+            new ConjuredItem('Conjured', 10, 10)
         ]);
     });
 
@@ -20,7 +22,7 @@ describe('Gilded Rose', function () {
             items = gilgedRose.updateQuality();
         });
 
-        it('should return Aged Brie', () => {
+        it('should return the name Aged Brie', () => {
             expect(items[0].name).to.equal('Aged Brie');
         });
 
@@ -40,15 +42,15 @@ describe('Gilded Rose', function () {
             items = gilgedRose.updateQuality();
         });
 
-        it('should return Sulfuras, Hand of Ragnaros', () => {
+        it('should return the name Sulfuras, Hand of Ragnaros', () => {
             expect(items[1].name).to.equal('Sulfuras, Hand of Ragnaros');
         });
 
-        it('should not have decreased in sellIn', () => {
+        it('should not have increased or decreased in sellIn', () => {
             expect(items[1].sellIn).to.equal(0);
         });
 
-        it('should not have increased in quality', () => {
+        it('should not have increased or decreased in quality', () => {
             expect(items[1].quality).to.equal(0);
         });
     });
@@ -60,7 +62,7 @@ describe('Gilded Rose', function () {
             items = gilgedRose.updateQuality();
         });
 
-        it('should return Backstage passes to a TAFKAL80ETC concert', () => {
+        it('should return the name Backstage passes to a TAFKAL80ETC concert', () => {
             expect(items[2].name).to.equal('Backstage passes to a TAFKAL80ETC concert');
         });
 
@@ -89,23 +91,79 @@ describe('Gilded Rose', function () {
         });
     });
 
-    describe('Something here', () => {
+    describe('Cheddar Cheese', () => {
         let items;
 
         beforeEach(() => {
             items = gilgedRose.updateQuality();
         });
 
-        it('should return Something here', () => {
-            expect(items[3].name).to.equal('Something here');
+        it('should return the name Cheddar Cheese', () => {
+            expect(items[3].name).to.equal('Cheddar Cheese');
         });
 
         it('should have decreased in sellIn', () => {
             expect(items[3].sellIn).to.equal(24);
         });
 
-        it('should have increased in quality', () => {
+        it('should have decreased in quality', () => {
             expect(items[3].quality).to.equal(4);
+        });
+
+        it('should have stopped increasing in quality after 5 days', () => {
+            for (let i = 0; i < 5; i++) {
+                items = gilgedRose.updateQuality();
+            }
+
+            expect(items[3].quality).to.equal(0);
+        });
+    });
+
+    describe('Bread', () => {
+        let items;
+
+        beforeEach(() => {
+            items = gilgedRose.updateQuality();
+        });
+
+        it('should return the name Bread', () => {
+            expect(items[4].name).to.equal('Bread');
+        });
+
+        it('should have decreased in sellIn', () => {
+            expect(items[4].sellIn).to.equal(1);
+        });
+
+        it('should have decreased in quality', () => {
+            expect(items[4].quality).to.equal(9);
+        });
+
+        it('should have stopped increasing in quality after 2 days', () => {
+            for (let i = 0; i < 2; i++) {
+                items = gilgedRose.updateQuality();
+            }
+
+            expect(items[4].quality).to.equal(5);
+        });
+    });
+
+    describe('Conjured', () => {
+        let items;
+
+        beforeEach(() => {
+            items = gilgedRose.updateQuality();
+        });
+
+        it('should return the name Conjured', () => {
+            expect(items[5].name).to.equal('Conjured');
+        });
+
+        it('should have decreased in sellIn', () => {
+            expect(items[5].sellIn).to.equal(9);
+        });
+
+        it('should have decreased double in quality', () => {
+            expect(items[5].quality).to.equal(8);
         });
     });
 });

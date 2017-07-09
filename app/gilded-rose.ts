@@ -8,7 +8,7 @@ export class BasicItem extends Item {
         this.sellIn = this.sellIn - 1;
     }
 
-    public updateQuality(increase: boolean): void {
+    public updateQuality(increase?: boolean): void {
         this.updateSellIn();
         
         if (increase) {
@@ -44,10 +44,18 @@ export class BackStagePassItem extends BasicItem {
     }
 }
 
+export class ConjuredItem extends BasicItem {
+    public updateQuality(): void {
+        super.updateQuality();
+        
+        this.quality = this.quality - 1;
+    }
+}
+
 export class GildedRose {
     constructor(private _items = []) {}
 
-    public updateQuality() {
+    public updateQuality(): Array<Item> {
         this._items.map((item) => {
             item.updateQuality();
         });
