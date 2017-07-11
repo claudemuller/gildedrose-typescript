@@ -2,10 +2,10 @@ import { expect } from 'chai';
 import { GildedRose, BackStagePassItem, BasicItem, BrieItem, SulfurasItem, ConjuredItem } from '../app/gilded-rose';
 
 describe('Gilded Rose', function () {
-    let gilgedRose;
+    let gildedRose;
 
     beforeEach(() => {
-        gilgedRose = new GildedRose([
+        gildedRose = new GildedRose([
             new BrieItem('Aged Brie', 10, 25),
             new SulfurasItem('Sulfuras, Hand of Ragnaros', 0, 0),
             new BackStagePassItem('Backstage passes to a TAFKAL80ETC concert', 15, 15),
@@ -19,7 +19,7 @@ describe('Gilded Rose', function () {
         let items;
 
         beforeEach(() => {
-            items = gilgedRose.updateQuality();
+            items = gildedRose.updateQuality();
         });
 
         it('should return the name Aged Brie', () => {
@@ -39,7 +39,7 @@ describe('Gilded Rose', function () {
         let items;
 
         beforeEach(() => {
-            items = gilgedRose.updateQuality();
+            items = gildedRose.updateQuality();
         });
 
         it('should return the name Sulfuras, Hand of Ragnaros', () => {
@@ -59,7 +59,7 @@ describe('Gilded Rose', function () {
         let items;
 
         beforeEach(() => {
-            items = gilgedRose.updateQuality();
+            items = gildedRose.updateQuality();
         });
 
         it('should return the name Backstage passes to a TAFKAL80ETC concert', () => {
@@ -76,7 +76,7 @@ describe('Gilded Rose', function () {
 
         it('should have increased in quality to double when sellIn less than 10', () => {
             for (let i = 0; i < 5; i++) {
-                items = gilgedRose.updateQuality();
+                items = gildedRose.updateQuality();
             }
 
             expect(items[2].quality).to.equal(23);
@@ -84,7 +84,7 @@ describe('Gilded Rose', function () {
 
         it('should have increased in quality to double when sellIn less than 5', () => {
             for (let i = 0; i < 10; i++) {
-                items = gilgedRose.updateQuality();
+                items = gildedRose.updateQuality();
             }
 
             expect(items[2].quality).to.equal(35);
@@ -95,7 +95,7 @@ describe('Gilded Rose', function () {
         let items;
 
         beforeEach(() => {
-            items = gilgedRose.updateQuality();
+            items = gildedRose.updateQuality();
         });
 
         it('should return the name Cheddar Cheese', () => {
@@ -112,7 +112,7 @@ describe('Gilded Rose', function () {
 
         it('should have stopped increasing in quality after 5 days', () => {
             for (let i = 0; i < 5; i++) {
-                items = gilgedRose.updateQuality();
+                items = gildedRose.updateQuality();
             }
 
             expect(items[3].quality).to.equal(0);
@@ -123,7 +123,7 @@ describe('Gilded Rose', function () {
         let items;
 
         beforeEach(() => {
-            items = gilgedRose.updateQuality();
+            items = gildedRose.updateQuality();
         });
 
         it('should return the name Bread', () => {
@@ -140,7 +140,7 @@ describe('Gilded Rose', function () {
 
         it('should have stopped increasing in quality after 2 days', () => {
             for (let i = 0; i < 2; i++) {
-                items = gilgedRose.updateQuality();
+                items = gildedRose.updateQuality();
             }
 
             expect(items[4].quality).to.equal(5);
@@ -151,7 +151,7 @@ describe('Gilded Rose', function () {
         let items;
 
         beforeEach(() => {
-            items = gilgedRose.updateQuality();
+            items = gildedRose.updateQuality();
         });
 
         it('should return the name Conjured', () => {
