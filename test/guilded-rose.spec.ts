@@ -33,6 +33,14 @@ describe('Gilded Rose', function () {
         it('should have increased in quality', () => {
             expect(items[0].quality).to.equal(26);
         });
+
+        it('should not exceed a quality level of 50', () => {
+            for (let i = 0; i < 25; i++) {
+                items = gildedRose.updateQuality();
+            }
+
+            expect(items[0].quality).to.equal(50);
+        });
     });
 
     describe('Sulfuras, Hand of Ragnaros', () => {
